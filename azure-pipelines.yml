@@ -1,0 +1,22 @@
+variables:
+  - group: 'Jackass Frontend - TEST'
+  - group: 'Semantic Versioning - TEST'
+  - name: 'ver.Patch'
+    value: $[counter(variables['ver.Minor'], 1)]
+
+name: DEV-ver$(ver.Major).$(ver.Minor).$(ver.Patch)
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
