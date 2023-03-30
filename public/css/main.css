@@ -1,0 +1,36 @@
+@import "https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap";
+
+* { font-family: "Quicksand", sans-serif!important; }
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-image: url(../img/landing.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+html {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+
+    --unit: 10px;
+    font-size: 15px;
+
+    --primary-base: #0096c7;
+    --white: #FFF;
+}
+
+h1 {
+    font-size: 6rem;
+    font-weight: 400;
+    color: var(--white);
+    text-align: center;
+}
+
+h1 em {
+    font-style: normal;
+    color: var(--primary-base);
+}
