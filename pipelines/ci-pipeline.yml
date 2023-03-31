@@ -10,6 +10,7 @@ jobs:
     vmImage: ubuntu-latest
   container: mcr.microsoft.com/playwright:latest
   steps:
+
   - checkout: self
 
   - task: Bash@3
@@ -35,13 +36,3 @@ jobs:
     - checkout: self
 
     - task: PublishBuildArtifacts@1
-      displayName: 'Publish Firebase.json'
-      inputs:
-        PathtoPublish: firebase.json
-        ArtifactName: drop/
-
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)/'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
