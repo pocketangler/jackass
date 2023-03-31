@@ -9,22 +9,19 @@ jobs:
   pool:
     vmImage: ubuntu-latest
   container: mcr.microsoft.com/playwright:v1.32.0-focal
-  strategy:
-    runOnce:
-      deploy:
-        steps:
-        - checkout: self
-        - task: Bash@3
-          displayName: 'Run Playwright tests'
-          inputs:
-            workingDirectory: 'test/e2e'
-            targetType: 'inline'
-            failOnStderr: true
-            env:
-              CI: true
-            script: |
-              npm ci
-              npx playwright test
+  steps:
+  - checkout: self
+  - task: Bash@3
+    displayName: 'Run Playwright tests'
+    inputs:
+      workingDirectory: 'test/e2e'
+      targetType: 'inline'
+      failOnStderr: true
+      env:
+        CI: true
+      script: |
+        npm ci
+        npx playwright test
 
 - job: deploy
   dependsOn: e2e
