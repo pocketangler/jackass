@@ -12,15 +12,6 @@ jobs:
   steps:
   - checkout: self
 
-  - task: Cache@2
-    inputs:
-      key: '"npm ci" | "$(Agent.OS)" | test/e2e/package-lock.json'
-      restoreKeys: |
-        npm ci | "$(Agent.OS)"
-        npm ci
-      path: "$(Pipeline.Workspace)/test/e2e/node_modules"
-    displayName: Cache node packages
-
   - task: Bash@3
     displayName: 'Run Playwright tests'
     inputs:
