@@ -18,7 +18,9 @@ export const main = onRequest(
         secrets: [
             "INFLUXDB_URL",
             "INFLUXDB_TOKEN"
-        ]
+        ],
+        maxInstances: 10,
+        region: "europe-west1"
     },
     app
 );
