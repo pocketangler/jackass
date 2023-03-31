@@ -1,5 +1,7 @@
 trigger:
 - main
+pool:
+  vmImage: ubuntu-latest
 
 jobs:
 - job: e2e
