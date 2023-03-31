@@ -60,7 +60,6 @@ jobs:
             --config firebase.json \
             --token "$(token)" \
             --project "$(project)" \
-            --only functions \
             --force \
             -m "$(Build.BuildNumber)" \
             --non-interactive \
