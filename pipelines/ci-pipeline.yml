@@ -55,6 +55,7 @@ jobs:
         targetType: 'inline'
         script: |
           npm install -g firebase-tools
+          (cd functions && npm ci)
           firebase \
             --debug \
             --config firebase.json \
