@@ -41,5 +41,6 @@ jobs:
           public/**
           firebase.json
           .firebaserc
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
     - task: PublishBuildArtifacts@1
