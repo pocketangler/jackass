@@ -42,6 +42,12 @@ h1 em {
     color: var(--primary-base);
 }
 
+body:not(.authentication-initialised) .not-authenticated,
+body:not(.authentication-initialised) .authenticated
+{
+    display: none;
+}
+
 body.authenticated .not-authenticated {
     display: none;
 }

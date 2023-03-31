@@ -14,7 +14,12 @@ initializeApp({
 });
 const auth = getAuth();
 
+let currentUser;
+
 onAuthStateChanged(auth, user => {
+
+    while(!document.body.classList.contains("authentication-initialised"))
+        document.body.classList.add("authentication-initialised");
 
     if(!user)
         while(document.body.classList.contains("authenticated"))
@@ -22,10 +27,10 @@ onAuthStateChanged(auth, user => {
     else
         while(!document.body.classList.contains("authenticated"))
             document.body.classList.add("authenticated");
-
-    console.log(user ? user : "Signed out");
+    currentUser = user;
 
 });
+
 for(let button of document.querySelectorAll("button.sign-in"))
     button.addEventListener("click", signIn);
 for (let button of document.querySelectorAll("button.sign-out"))
