@@ -36,3 +36,5 @@ jobs:
     - checkout: self
 
     - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: "."
