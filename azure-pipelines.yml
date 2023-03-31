@@ -17,11 +17,11 @@ jobs:
       workingDirectory: 'test/e2e'
       targetType: 'inline'
       failOnStderr: true
-      env:
-        CI: true
       script: |
         npm ci
         npx playwright test
+    env:
+      CI: true
 
 - job: deploy
   dependsOn: e2e
