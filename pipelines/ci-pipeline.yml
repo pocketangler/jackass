@@ -26,7 +26,7 @@ jobs:
         node --version
         npm --version
         npm ci
-        npx playwright test
+        "npx playwright test"
     env:
       CI: true
 
@@ -52,6 +52,7 @@ jobs:
     - task: Bash@3
       displayName: Firebase deploy
       inputs:
+        workingDirectory: "/"
         script: |
           firebase \
             --debug \
