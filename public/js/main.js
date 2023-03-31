@@ -16,7 +16,7 @@ const auth = getAuth();
 
 let currentUser;
 
-onAuthStateChanged(auth, user => {
+onAuthStateChanged(auth, async user => {
 
     while(!document.body.classList.contains("authentication-initialised"))
         document.body.classList.add("authentication-initialised");
@@ -28,6 +28,36 @@ onAuthStateChanged(auth, user => {
         while(!document.body.classList.contains("authenticated"))
             document.body.classList.add("authenticated");
     currentUser = user;
+
+    if(currentUser) {
+
+        const resp = await fetch("/river-levels");
+        const data = await resp.json();
+        const countries = new Map();
+        data.forEach(({ _time, riverCountry, riverName, gaugeName, _field, _value }) => {
+
+            if(!countries.has(riverCountry))
+                countries.set(riverCountry, new Map());
+            const country = countries.get(riverCountry);
+
+            if(!country.has(riverName))
+                country.set(riverName, new Map());
+            const river = country.get(riverName);
+
+            if(!(river.has(gaugeName)))
+                river.set(gaugeName, new Map());
+            const gauge = river.get(gaugeName);
+
+            if(!gauge.has(_time))
+                gauge.set(_time, {});
+
+            const dataPoint = gauge.get(_time);
+            dataPoint[_field] = _value;
+
+        });
+        console.log(countries);
+
+    }
 
 });
 
