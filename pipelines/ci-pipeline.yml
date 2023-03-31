@@ -11,7 +11,7 @@ jobs:
 - job: e2e
   pool:
     vmImage: ubuntu-latest
-  container: mcr.microsoft.com/playwright:latest
+  #container: mcr.microsoft.com/playwright:latest
   steps:
 
   - checkout: self
@@ -52,7 +52,7 @@ jobs:
     - task: Bash@3
       displayName: Firebase deploy
       inputs:
-        workingDirectory: "/"
+        workingDirectory: "$(Build.Repository.LocalPath)"
         script: |
           firebase \
             --debug \
