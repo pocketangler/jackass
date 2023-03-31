@@ -35,6 +35,11 @@ jobs:
 
     - checkout: self
 
-    - task: PublishBuildArtifacts@1
+    - task: CopyFiles@2
       inputs:
-        PathtoPublish: "."
+        Contents: |
+          public/**
+          firebase.json
+          .firebaserc
+
+    - task: PublishBuildArtifacts@1
