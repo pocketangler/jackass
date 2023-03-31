@@ -9,6 +9,7 @@
   <meta name="version" content="0.0.1">
   <title>Pocket Angler</title>
   <link rel="stylesheet" href="./css/main.css">
+  <script type="module" src="./js/main.js"></script>
   <style>
     body {
       display: flex;
@@ -33,10 +34,16 @@
     <h1>
       Your dedicated <em>pocket assistant</em>
     </h1>
+    <aside class="authenticated">
+      <button class="sign-out">Sign out</button>
+    </aside>
+    <aside class="not-authenticated">
+      <button class="sign-in">Sign in</button>
+    </aside>
   </main>
 
   <script>
-    console.log(document.querySelector("meta[name=version]").getAttribute("content"));
+    console.log(`Version: ${document.querySelector("meta[name=version]").getAttribute("content")}`);
   </script>
 </body>
 

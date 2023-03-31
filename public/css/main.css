@@ -41,3 +41,11 @@ h1 em {
     font-style: normal;
     color: var(--primary-base);
 }
+
+body.authenticated .not-authenticated {
+    display: none;
+}
+
+body:not(.authenticated) .authenticated {
+    display: none;
+}
