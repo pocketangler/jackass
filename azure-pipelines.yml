@@ -8,7 +8,7 @@ jobs:
 - job: e2e
   pool:
     vmImage: ubuntu-latest
-  container: mcr.microsoft.com/playwright:v1.32.0-focal
+  container: mcr.microsoft.com/playwright:latest
   steps:
   - checkout: self
 
