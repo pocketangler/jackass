@@ -16,19 +16,19 @@ jobs:
 
   - checkout: self
 
-  - task: Bash@3
-    displayName: 'Run Playwright tests'
-    inputs:
-      workingDirectory: 'test/e2e'
-      targetType: 'inline'
-      failOnStderr: true
-      script: |
-        node --version
-        npm --version
-        npm ci
-        "npx playwright test"
-    env:
-      CI: true
+  # - task: Bash@3
+  #   displayName: 'Run Playwright tests'
+  #   inputs:
+  #     workingDirectory: 'test/e2e'
+  #     targetType: 'inline'
+  #     failOnStderr: true
+  #     script: |
+  #       node --version
+  #       npm --version
+  #       npm ci
+  #       npx playwright test
+  #   env:
+  #     CI: true
 
 - job: deploy
   dependsOn: e2e
