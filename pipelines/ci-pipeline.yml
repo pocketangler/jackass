@@ -1,3 +1,6 @@
+variables:
+- group: firebase
+
 trigger:
 - main
 
@@ -45,3 +48,19 @@ jobs:
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
     - task: PublishBuildArtifacts@1
+
+    - task: Bash@3
+      displayName: Firebase deploy
+      inputs:
+        script: |
+          firebase \
+            --debug \
+            --config firebase.json \
+            --token "$(token)" \
+            --project "$(project)" \
+            --only functions \
+            --force \
+            -m "$(Build.BuildNumber)" \
+            --non-interactive \
+            deploy
+
