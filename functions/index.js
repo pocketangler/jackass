@@ -1,5 +1,5 @@
 import { onRequest } from "firebase-functions/v2/https";
-import { defineSecret } from "firebase-functions/v2/params";
+import { defineSecret } from "firebase-functions/params";
 
 import buildApp from "./app.js";
 
