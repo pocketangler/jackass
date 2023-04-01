@@ -13,12 +13,15 @@
   },
   "emulators": {
     "functions": {
+      "host": "127.0.0.1",
       "port": 5001
     },
     "hosting": {
+      "host": "127.0.0.1",
       "port": 5000
     },
     "ui": {
+      "host": "127.0.0.1",
       "enabled": true
     },
     "singleProjectMode": true
