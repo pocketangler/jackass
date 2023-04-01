@@ -17,17 +17,28 @@ jobs:
   - checkout: self
 
   - task: Bash@3
+    displayName: 'Install firebase and playwright'
+    inputs:
+      targetType: 'inline'
+      failOnStderr: false,
+      script: |
+        node --version
+        npm --version
+        (cd functions && npm ci)
+        (cd tests/e2e && npm ci)
+        npm install -g firebase-tools
+    env:
+      CI: true
+
+  - task: Bash@3
     displayName: 'Run Playwright tests'
     inputs:
       workingDirectory: 'test/e2e'
       targetType: 'inline'
       failOnStderr: true
       script: |
-        node --version
-        npm --version
-        npm ci
-        npx firebase use pocketangler-v1-5 --token "$(token)"
-        npx firebase emulators:exec "npx playwright test" --token "$(token)"
+        firebase use pocketangler-v1-5 --token "$(token)"
+        firebase emulators:exec "npx playwright test" --token "$(token)"
     env:
       CI: true
 
