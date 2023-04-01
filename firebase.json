@@ -13,16 +13,31 @@
   },
   "emulators": {
     "functions": {
-      "host": "127.0.0.1",
+      "host": "0.0.0.0",
       "port": 5001
     },
     "hosting": {
-      "host": "127.0.0.1",
+      "host": "0.0.0.0",
       "port": 5000
     },
     "ui": {
-      "host": "127.0.0.1",
+      "host": "0.0.0.0",
       "enabled": true
+    },
+    "hub": {
+      "host": "0.0.0.0"
+    },
+    "logging": {
+      "host": "0.0.0.0"
+    },
+    "auth": {
+      "host": "0.0.0.0"
+    },
+    "eventarc": {
+      "host": "0.0.0.0"
+    },
+    "storage": {
+      "host": "0.0.0.0"
     },
     "singleProjectMode": true
   },
