@@ -26,8 +26,8 @@ jobs:
         node --version
         npm --version
         npm ci
-        npx firebase use pocketangler-v1-5
-        npx firebase emulators:exec "npx playwright test"
+        npx firebase use pocketangler-v1-5 --token "$(token)"
+        npx firebase emulators:exec "npx playwright test" --token "$(token)"
     env:
       CI: true
 
