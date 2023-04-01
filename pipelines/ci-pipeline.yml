@@ -11,10 +11,14 @@ jobs:
 - job: e2e
   pool:
     vmImage: ubuntu-latest
-  container: mcr.microsoft.com/playwright:latest
   steps:
 
   - checkout: self
+
+  - task: NodeTool@0
+    displayName: 'Node 16'
+    inputs:
+      versionSpec: '16.x'
 
   - task: Bash@3
     displayName: 'Install firebase'
@@ -41,6 +45,12 @@ jobs:
       script: npm ci
     env:
       CI: true
+
+  - task: Bash@3
+    displayName: "Install playwright browsers"
+    inputs:
+      workingDirectory: 'test/e2e'
+      script: npx playwright install --with-deps
 
   - task: Bash@3
     displayName: 'Run Playwright tests'
