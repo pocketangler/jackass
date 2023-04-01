@@ -19,9 +19,79 @@ html {
 
     --unit: 10px;
     font-size: 15px;
+}
 
-    --primary-base: #0096c7;
-    --white: #FFF;
+body.authenticated .not-authenticated {
+    display: none;
+}
+
+body:not(.authenticated) .authenticated {
+    display: none;
+}
+
+body:not(.authentication-initialised) .not-authenticated,
+body:not(.authentication-initialised) .authenticated,
+body:not(.authentication-initialised) .needs-authentication-initialised
+{
+    display: none;
+}
+
+
+/* colors */
+
+html {
+    --light-blue: #0096c7;
+    --light-blue-highlight: #0fafe4;
+    --white: rgb(255, 255, 255);
+    --light-grey: #EEE;
+    --grey: #6A6A6A;
+}
+
+a {
+    color: var(--light-blue);
+}
+
+/* body themes */
+
+body.centred {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+/* ripple effect */
+button.ripple {
+    background-position: center;
+    transition: background 0.8s;
+}
+
+button.ripple:hover {
+    background: var(--light-blue-highlight) radial-gradient(circle, transparent 1%, var(--light-blue-highlight) 1%) center/15000%;
+}
+
+button.ripple:active {
+    background-color: var(--light-blue);
+    background-size: 100%;
+    transition: background 0s;
+}
+
+button {
+    background-color: var(--light-blue);
+    border: none;
+    min-height: calc(3 * var(--unit));
+    min-width: calc(10 * var(--unit));
+    padding: var(--unit);
+    border-radius: calc(0.5 * var(--unit));
+    color: var(--white);
+}
+/* styles */
+
+aside.login {
+    position: absolute;
+    top: var(--unit);
+    right: var(--unit);
+    color: var(--white);
 }
 
 h1 {
@@ -39,19 +109,5 @@ h1 {
 
 h1 em {
     font-style: normal;
-    color: var(--primary-base);
-}
-
-body.authenticated .not-authenticated {
-    display: none;
-}
-
-body:not(.authenticated) .authenticated {
-    display: none;
-}
-
-body:not(.authentication-initialised) .not-authenticated,
-body:not(.authentication-initialised) .authenticated
-{
-    display: none;
+    color: var(--light-blue);
 }

@@ -1,6 +1,9 @@
 @import "https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap";
 
-* { font-family: "Quicksand", sans-serif!important; }
+* {
+    font-family: "Quicksand",
+    sans-serif!important;
+}
 
 html, body {
     height: 100%;
@@ -11,4 +14,43 @@ html {
     -webkit-font-smoothing: antialiased;
     --unit: 10px;
     font-size: 15px;
+}
+
+/* colors */
+
+html {
+    --light-blue: #0096c7;
+    --light-blue-highlight: #0fafe4;
+    --white: rgb(255, 255, 255);
+    --light-grey: #EEE;
+    --grey: #6A6A6A;
+}
+
+a {
+    color: var(--light-blue);
+}
+
+/* body themes */
+
+body.centred {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+/* ripple effect */
+button.ripple {
+    background-position: center;
+    transition: background 0.8s;
+}
+
+button.ripple:hover {
+    background: var(--light-blue-highlight) radial-gradient(circle, transparent 1%, var(--light-blue-highlight) 1%) center/15000%;
+}
+
+button.ripple:active {
+    background-color: var(--light-blue);
+    background-size: 100%;
+    transition: background 0s;
 }

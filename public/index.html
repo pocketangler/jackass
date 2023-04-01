@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="dedicated fishery management and angler travel platform">
   <meta name="version" content="0.0.1">
-  <title>Pocket Angler</title>
+  <title>PocketAngler</title>
   <link rel="stylesheet" href="./css/main.css">
   <script type="module" src="./js/main.js"></script>
   <style>
@@ -17,13 +17,15 @@
       align-items: center;
       justify-content: center;
     }
+
     main {
       max-width: calc(100 * var(--unit));
       display: flex;
       flex-direction: column;
-      align-items:center;
+      align-items: center;
       justify-content: center;
     }
+
   </style>
 </head>
 
@@ -34,11 +36,17 @@
     <h1>
       Your dedicated <em>pocket assistant</em>
     </h1>
-    <aside class="authenticated">
-      <button class="sign-out">Sign out</button>
-    </aside>
-    <aside class="not-authenticated">
-      <button class="sign-in">Sign in</button>
+
+    <aside class="login">
+      <div class="authenticated">
+        <span class="username"></span>
+        <button class="sign-out ripple">Sign out</button>
+      </div>
+      <div class="not-authenticated">
+        <a href="login.html">
+          <button class="ripple">Sign in</button>
+        </a>
+      </div>
     </aside>
   </main>
 

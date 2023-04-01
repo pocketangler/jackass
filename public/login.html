@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="dedicated fishery management and angler travel platform">
+    <meta name="version" content="0.0.1">
+    <title>PocketAngler - Log in</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <script type="module" src="./js/main.js"></script>
+</head>
+
+<body class="centred">
+
+    <section class="login needs-authentication-initialised">
+        <header>
+            <img width="222" height="145" src="./img/PA-with-text-logo.svg" alt="PocketAngler logo">
+            <h1>Sign in to your account</h1>
+        </header>
+
+        <form>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+            <button class="ripple">Sign In</button>
+        </form>
+
+        <div class="splitter feature-login_goo">
+            <hr>
+            or sign in with
+            <hr>
+        </div>
+        <button class="feature-login_goo">The Google</button>
+        <div class="splitter feature-login_fp"></div>
+        <a class="feature-login_fp" href="javascript: alert('...');">Forgot password?</a>
+
+    </section>
+
+</body>
+
+</html>
