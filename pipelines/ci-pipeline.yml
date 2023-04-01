@@ -21,7 +21,7 @@ jobs:
       versionSpec: '16.x'
 
   - task: Bash@3
-    displayName: 'Install Firebase tools'
+    displayName: 'Firebase tools'
     inputs:
       targettype: 'inline'
       script: npm install -g firebase-tools
@@ -29,7 +29,7 @@ jobs:
       CI: true
 
   - task: Bash@3
-    displayName: 'Install Firebase functions node modules'
+    displayName: 'Firebase functions node modules'
     inputs:
       workingDirectory: 'functions'
       targetType: 'inline'
@@ -38,7 +38,7 @@ jobs:
       CI: true
 
   - task: Bash@3
-    displayName: 'Install Playwright node modules'
+    displayName: 'Playwright node modules'
     inputs:
       workingDirectory: 'test/e2e'
       targetType: 'inline'
@@ -47,10 +47,10 @@ jobs:
       CI: true
 
   - task: Bash@3
-    displayName: "Install Playwright browsers"
+    displayName: "Playwright browsers"
     inputs:
       workingDirectory: 'test/e2e'
-      targetTyoe: 'inline'
+      targetType: 'inline'
       script: npx playwright install --with-deps
 
   - task: Bash@3
