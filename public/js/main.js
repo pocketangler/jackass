@@ -30,7 +30,8 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from
                 document.body.classList.add("authenticated");
         currentUser = user;
 
-        document.querySelector(".username").textContent = currentUser ? currentUser.displayName || currentUser.email : "";
+        document.querySelector(".username").textContent =
+            currentUser ? currentUser.displayName || currentUser.email : "";
 
         if (currentUser) {
 
