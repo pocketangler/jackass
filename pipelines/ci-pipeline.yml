@@ -11,7 +11,7 @@ jobs:
 - job: e2e
   pool:
     vmImage: ubuntu-latest
-  container: mcr.microsoft.com/playwright:latest
+  #container: mcr.microsoft.com/playwright:latest
   steps:
 
   - checkout: self
