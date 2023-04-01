@@ -26,7 +26,8 @@ jobs:
         node --version
         npm --version
         npm ci
-        npx firebase-tools emulators:exec "npx playwright test"
+        npm install firebase-tools
+        npm run ci
     env:
       CI: true
 

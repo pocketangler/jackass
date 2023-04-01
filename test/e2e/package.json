@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "ci": "firebase emulators:exec playwright test"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
