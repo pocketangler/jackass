@@ -17,16 +17,28 @@ jobs:
   - checkout: self
 
   - task: Bash@3
-    displayName: 'Install firebase and playwright'
+    displayName: 'Install firebase'
     inputs:
+      targettype: 'inline'
+      script: npm install -g firebase-tools
+    env:
+      CI: true
+
+  - task: Bash@3
+    displayName: 'npm install Firebase functions'
+    inputs:
+      workingDirectory: 'functions'
       targetType: 'inline'
-      failOnStderr: false,
-      script: |
-        node --version
-        npm --version
-        (cd functions && npm ci)
-        (cd tests/e2e && npm ci)
-        npm install -g firebase-tools
+      script: npm ci
+    env:
+      CI: true
+
+  - task: Base@3
+    displayName: 'npm install Playwright tests'
+    inputs:
+      workingDirectory: 'test/e2e'
+      targetType: 'inline'
+      script: npm ci
     env:
       CI: true
 
