@@ -33,7 +33,7 @@ jobs:
     env:
       CI: true
 
-  - task: Base@3
+  - task: Bash@3
     displayName: 'npm install Playwright tests'
     inputs:
       workingDirectory: 'test/e2e'
