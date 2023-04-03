@@ -37,11 +37,10 @@ module.exports = defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
 
-    // README: current apparent bug in Playwright+Firefox when using a service worker and requesting a cross-domain HTTPS url (e.g. the firebase libraries from gstatic.com)
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
 
     {
       name: 'webkit',
