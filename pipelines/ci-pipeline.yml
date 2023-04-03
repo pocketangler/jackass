@@ -10,7 +10,7 @@ pool:
 jobs:
 - job: e2e
   pool:
-    vmImage: 'ubuntu-22.04'
+    vmImage: 'macos-latest'
   steps:
 
   - checkout: self
@@ -68,7 +68,7 @@ jobs:
 - job: deploy
   dependsOn: e2e
   pool:
-    vmImage: macos-latest
+    vmImage: ubuntu-latest
   steps:
 
     - checkout: self
