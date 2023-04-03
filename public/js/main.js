@@ -14,12 +14,13 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, conne
         appId: "1:202145643651:web:523cf9ad10da18c64fafb6",
         measurementId: "G-NS7XX03KRE"
     });
+
     const auth = getAuth();
     if (localStorage.getItem("dev-mode")) {
         connectAuthEmulator(auth, "http://localhost:9099");
     }
 
-    let currentUser;
+    let currentUser, currentUserToken;
 
     onAuthStateChanged(auth, async user => {
 
@@ -34,13 +35,14 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, conne
             while (!document.body.classList.contains("authenticated"))
                 document.body.classList.add("authenticated");
         currentUser = user;
+        currentUserToken = await currentUser.getIdToken(true);
 
         document.querySelector(".username").textContent =
             currentUser ? currentUser.displayName || currentUser.email : "";
 
         if (currentUser) {
 
-            await sampleRiverLevelsQuery();
+            await sampleRiverLevelsQuery({ token: currentUserToken });
 
         }
 
@@ -103,8 +105,8 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, conne
 
 }());
 
-async function sampleRiverLevelsQuery() {
-    const resp = await fetch("/river-levels");
+async function sampleRiverLevelsQuery({ token }) {
+    const resp = await fetch("/river-levels", { headers: { "Authorization": `Bearer ${token}` }});
     const data = await resp.json();
     const countries = new Map();
     data.forEach(({ _time, riverCountry, riverName, gaugeName, _field, _value }) => {
