@@ -8,8 +8,7 @@ pool:
   vmImage: ubuntu-latest
 
 jobs:
-- job: e2e
-  name: "End-to-end testing"
+- job: End-to-end testing
   runs-on: 'ubuntu-latest'
   container: mcr.microsoft.com/playwright:latest
 
