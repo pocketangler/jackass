@@ -11,7 +11,7 @@ export default async ({ page, context }, use) => {
             if(!storageState.origins.some(o => o.localStorage.find(x => x.name === "dev-mode")))
             {
                 await page.evaluate(() => localStorage.setItem("dev-mode", true));
-                await page.reload();
+                await page.goto("/");
             }
             await page.getByText("Sign in").click();
             await page.locator("form").getByText("Email").fill(username);
