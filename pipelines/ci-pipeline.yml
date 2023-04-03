@@ -9,8 +9,10 @@ pool:
 
 jobs:
 - job: e2e
-  pool:
-    vmImage: 'ubuntu-20.04'
+  name: "End-to-end testing"
+  runs-on: 'ubuntu-latest'
+  container: mcr.microsoft.com/playwright:latest
+
   steps:
 
   - checkout: self
@@ -61,7 +63,7 @@ jobs:
       failOnStderr: true
       script: |
         firebase use pocketangler-v1-5 --token "$(token)"
-        firebase emulators:exec --import ../emulator-state "WEBKIT_DISABLE_COMPOSITING_MODE=1 npx playwright test" --token "$(token)"
+        firebase emulators:exec --import ../emulator-state "npx playwright test" --token "$(token)"
     env:
       CI: true
 
