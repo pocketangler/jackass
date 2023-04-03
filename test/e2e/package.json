@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "ci": "firebase emulators:exec playwright test"
+    "ci": "firebase emulators:exec playwright test",
+    "test": "playwright test"
   },
   "author": "",
   "license": "ISC",

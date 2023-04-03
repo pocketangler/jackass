@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.19.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, connectAuthEmulator } from "https://www.gstatic.com/firebasejs/9.19.0/firebase-auth.js";
 
 (async function () {
 
@@ -13,6 +13,9 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from
         measurementId: "G-NS7XX03KRE"
     });
     const auth = getAuth();
+    if (localStorage.getItem("dev-mode")) {
+        connectAuthEmulator(auth, "http://localhost:9099");
+    }
 
     let currentUser;
 
@@ -47,15 +50,20 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from
         button.addEventListener("click", () => signOut(auth));
 
     const loginForm = document.querySelector("section.login form");
-    if(loginForm) {
+    if (loginForm) {
 
         loginForm.addEventListener("submit", async e => {
 
             e.preventDefault();
             const data = new FormData(loginForm);
-            const result = await signInWithEmailAndPassword(auth, data.get("email"), data.get("password"));
-            const { user } = result;
-            if(user) location.href = "/";
+            try {
+                console.log(data.get("email"), data.get("password"));
+                const result = await signInWithEmailAndPassword(auth, data.get("email"), data.get("password"));
+                const { user } = result;
+                if (user) location.href = "/";
+            } catch (err) {
+                console.error(err.stack);
+            }
 
         });
 
