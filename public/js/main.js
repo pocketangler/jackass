@@ -1,5 +1,7 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, connectAuthEmulator } from "https://www.gstatic.com/firebasejs/9.19.0/firebase-auth.js";
+import { initializeApp } from
+    "https://www.gstatic.com/firebasejs/9.19.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, connectAuthEmulator } from
+    "https://www.gstatic.com/firebasejs/9.19.0/firebase-auth.js";
 
 (async function () {
 
