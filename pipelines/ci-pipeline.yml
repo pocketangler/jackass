@@ -10,7 +10,7 @@ pool:
 jobs:
 - job: e2e
   pool:
-    vmImage: ubuntu-latest
+    vmImage: 'ubuntu-22.04'
   steps:
 
   - checkout: self
