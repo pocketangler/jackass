@@ -1,4 +1,4 @@
-import base from "@playwright/test";
+import base, { expect } from "@playwright/test";
 
 export const test = base.extend({
 
@@ -18,16 +18,32 @@ export const test = base.extend({
                 await page.getByText("Sign in").click();
                 await page.locator("form").getByText("Email").fill(username);
                 await page.locator("form").getByText("Password").fill(password);
-                await page.locator("form").getByText("Sign In").click();
-                
+                await Promise.all([
+                    page.waitForURL("/"),
+                    page.locator("form").getByText("Sign In").click()
+                ]);
+
             },
 
             async expectSignedInAs(name) {
 
                 await page.waitForSelector("body.authenticated");
-                await base
-                    .expect(page.locator("aside .username"))
-                    .toContainText(name);
+                await expect(page.locator("aside .username")).toContainText(name);
+                await expect(page.locator("aside button", { hasText: "Sign out"})).toBeVisible();
+
+            },
+
+            async signOut() {
+
+                await page.click("button", { hasText: "Sign out" });
+
+            },
+
+            async expectSignedOut() {
+
+
+                await page.waitForSelector("body.authentication-initialised:not(.authenticated)");
+                await expect(page.locator("aside button", { hasText: "Sign in" })).toBeVisible();
 
             }
 
