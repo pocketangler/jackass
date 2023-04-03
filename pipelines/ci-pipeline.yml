@@ -61,7 +61,7 @@ jobs:
       failOnStderr: true
       script: |
         firebase use pocketangler-v1-5 --token "$(token)"
-        firebase emulators:exec --import ../emulator-state "npx playwright test" --token "$(token)"
+        firebase emulators:exec --import ../emulator-state "DEBUG=pw:browser*,pw:api npx playwright test" --token "$(token)"
     env:
       CI: true
 
