@@ -10,7 +10,7 @@ pool:
 jobs:
 - job: e2e
   pool:
-    vmImage: 'macos-latest'
+    vmImage: 'ubuntu-20.04'
   steps:
 
   - checkout: self
