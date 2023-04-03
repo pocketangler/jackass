@@ -9,7 +9,8 @@ pool:
 
 jobs:
 - job: e2e
-  runs-on: 'ubuntu-latest'
+  pool:
+    vmImage: 'ubuntu-latest'
   container: mcr.microsoft.com/playwright:latest
 
   steps:
