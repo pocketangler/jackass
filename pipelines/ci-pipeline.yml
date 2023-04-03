@@ -68,7 +68,7 @@ jobs:
 - job: deploy
   dependsOn: e2e
   pool:
-    vmImage: ubuntu-latest
+    vmImage: macos-latest
   steps:
 
     - checkout: self
