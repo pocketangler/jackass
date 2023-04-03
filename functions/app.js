@@ -1,20 +1,19 @@
 import createApp, { Router } from "express";
 import { InfluxDB } from "@influxdata/influxdb-client";
 
-export default function buildApp({ secrets: { INFLUXDB_URL, INFLUXDB_TOKEN }, auth }) {
+export default function buildApp({ secrets: { INFLUXDB_URL, INFLUXDB_TOKEN }, auth, logger }) {
 
-    console.log(auth.verifyIdToken);
     const app = createApp();
 
     app.use(async (req, res, next) => {
 
         let idToken;
         if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
-            console.log('Found "Authorization" header');
+            logger.debug(`Found "Authorization" header`);
             // Read the ID Token from the Authorization header.
             idToken = req.headers.authorization.split('Bearer ')[1];
         } else if (req.cookies) {
-            console.log('Found "__session" cookie');
+            logger.debug(`Found "__session" cookie`);
             // Read the ID Token from cookie.
             idToken = req.cookies.__session;
         } else {
@@ -28,7 +27,7 @@ export default function buildApp({ secrets: { INFLUXDB_URL, INFLUXDB_TOKEN }, au
                 req.user = decodedIdToken;
                 next();
             } catch (error) {
-                console.error("Error while verifying Firebase ID token:", error);
+                logger.error("Error while verifying Firebase ID token:", error);
                 res.status(403).send({ type: "error", description: "Unauthorized" });
             }
         }
