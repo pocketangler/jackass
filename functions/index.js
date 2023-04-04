@@ -2,7 +2,7 @@ import { onRequest } from "firebase-functions/v2/https";
 import { defineSecret } from "firebase-functions/params";
 import { initializeApp } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
-import { logger } from "firebase-functions/v2";
+
 
 const auth = getAuth(initializeApp());
 
@@ -16,8 +16,7 @@ const app = buildApp({
         INFLUXDB_URL,
         INFLUXDB_TOKEN
     },
-    auth,
-    logger
+    auth
 });
 
 export const main = onRequest(

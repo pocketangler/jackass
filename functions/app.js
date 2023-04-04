@@ -1,19 +1,56 @@
 import createApp, { Router } from "express";
 import { InfluxDB } from "@influxdata/influxdb-client";
 
+const projectId = "pocketangler-v1-5";
+
+function objectify(x) {
+    if(x instanceof Error)
+        return { message: x.stack };
+    else
+        return { message: x };
+}
+
 export default function buildApp({ secrets: { INFLUXDB_URL, INFLUXDB_TOKEN }, auth, logger }) {
 
     const app = createApp();
 
     app.use(async (req, res, next) => {
 
+        req.logger = console;
+        const traceHeader = req.header("X-Cloud-Trace-Context");
+        if (traceHeader) {
+
+            const globalLogFields = {
+                "logging.googleapis.com/trace": `projects/${projectId}/traces/${traceHeader.split("/")[0]}`,
+                component: "main function",
+            };
+            const log = (severity, x) => console.log(JSON.stringify({ ...globalLogFields, severity, ...objectify(x) }));
+            req.logger = {
+                info: log.bind(this, "NOTICE"),
+                debug: log.bind(this, "DEBUG"),
+                warn: log.bind(this, "WARNING"),
+                error: log.bind(this, "ERROR")
+            };
+
+        }
+        next();
+
+    });
+
+    app.use(async (req, res, next) => {
+
+        req.logger.info("Some info");
+        req.logger.warn("A warning");
+        req.logger.debug("Debuggery");
+        req.logger.error(new Error("Some error"));
+
         let idToken;
-        if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
-            logger.debug(`Found "Authorization" header`);
+        if (req.headers.authorization && req.headers.authorization.startsWith("Bearer ")) {
+            await req.logger.info(`Found "Authorization" header`);
             // Read the ID Token from the Authorization header.
-            idToken = req.headers.authorization.split('Bearer ')[1];
+            idToken = req.headers.authorization.split("Bearer ")[1];
         } else if (req.cookies) {
-            logger.debug(`Found "__session" cookie`);
+            await req.logger.info(`Found "__session" cookie`);
             // Read the ID Token from cookie.
             idToken = req.cookies.__session;
         } else {
@@ -27,7 +64,7 @@ export default function buildApp({ secrets: { INFLUXDB_URL, INFLUXDB_TOKEN }, au
                 req.user = decodedIdToken;
                 next();
             } catch (error) {
-                logger.error("Error while verifying Firebase ID token:", error);
+                await req.logger.error("Error while verifying Firebase ID token:", error);
                 res.status(403).send({ type: "error", description: "Unauthorized" });
             }
         }

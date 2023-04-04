@@ -35,7 +35,7 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, conne
             while (!document.body.classList.contains("authenticated"))
                 document.body.classList.add("authenticated");
         currentUser = user;
-        currentUserToken = await currentUser.getIdToken(true);
+        currentUserToken = currentUser && await currentUser.getIdToken(true);
 
         document.querySelector(".username").textContent =
             currentUser ? currentUser.displayName || currentUser.email : "";
@@ -106,30 +106,34 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, conne
 }());
 
 async function sampleRiverLevelsQuery({ token }) {
-    const resp = await fetch("/river-levels", { headers: { "Authorization": `Bearer ${token}` }});
-    const data = await resp.json();
-    const countries = new Map();
-    data.forEach(({ _time, riverCountry, riverName, gaugeName, _field, _value }) => {
+    const resp = await fetch("/river-levels", { headers: { "Authorization": `Bearer ${token}` } });
+    if (!resp.ok) {
+        console.error(resp);
+    } else {
+        const data = await resp.json();
+        const countries = new Map();
+        data.forEach(({ _time, riverCountry, riverName, gaugeName, _field, _value }) => {
 
-        if (!countries.has(riverCountry))
-            countries.set(riverCountry, new Map());
-        const country = countries.get(riverCountry);
+            if (!countries.has(riverCountry))
+                countries.set(riverCountry, new Map());
+            const country = countries.get(riverCountry);
 
-        if (!country.has(riverName))
-            country.set(riverName, new Map());
-        const river = country.get(riverName);
+            if (!country.has(riverName))
+                country.set(riverName, new Map());
+            const river = country.get(riverName);
 
-        if (!(river.has(gaugeName)))
-            river.set(gaugeName, new Map());
-        const gauge = river.get(gaugeName);
+            if (!(river.has(gaugeName)))
+                river.set(gaugeName, new Map());
+            const gauge = river.get(gaugeName);
 
-        if (!gauge.has(_time))
-            gauge.set(_time, {});
+            if (!gauge.has(_time))
+                gauge.set(_time, {});
 
-        const dataPoint = gauge.get(_time);
-        dataPoint[_field] = _value;
+            const dataPoint = gauge.get(_time);
+            dataPoint[_field] = _value;
 
-    });
-    console.log(countries);
+        });
+        console.log(countries);
+    }
 }
 
