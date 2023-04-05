@@ -55,6 +55,15 @@ jobs:
       CI: true
 
   - task: Bash@3
+    display: 'Playwright browsers'
+    inputs:
+      workingDirectory: 'test/e2e'
+      targettype: 'inline'
+      script: npx playwright install
+    env:
+      CI: true
+
+  - task: Bash@3
     displayName: 'Run Playwright tests'
     inputs:
       workingDirectory: 'test/e2e'
