@@ -72,6 +72,7 @@ jobs:
       script: |
         firebase use pocketangler-v1-5 --token "$(token)"
         firebase emulators:exec --import ../emulator-state "npx playwright test" --token "$(token)"
+        (ls broken || ls .) 2> >(while read line; do (>&2 echo "STDERROR: $line"); done)
     env:
       CI: true
 
