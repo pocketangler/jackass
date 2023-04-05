@@ -41,8 +41,9 @@ import { getFirestore, getDoc, doc, connectFirestoreEmulator } from
         currentUser = user;
         currentUserToken = currentUser && await currentUser.getIdToken(true);
 
-        document.querySelector(".username")?.textContent =
-            currentUser ? currentUser.displayName || currentUser.email : "";
+        const usernameContainer = document.querySelector(".username");
+        if(usernameContainer)
+            usernameContainer.textContent = currentUser ? currentUser.displayName || currentUser.email : "";
 
         if (currentUser) {
 
