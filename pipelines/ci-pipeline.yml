@@ -51,7 +51,7 @@ jobs:
       workingDirectory: 'test/e2e'
       targetType: 'inline'
       script: |
-        npx playwright install --with deps
+        npx playwright install --with-deps
         npm ci
     env:
       CI: true
