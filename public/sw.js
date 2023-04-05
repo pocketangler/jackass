@@ -26,6 +26,7 @@ async function readThrough(event) {
 
 async function freshenResponse(request, cache) {
     const response = await fetch(request);
-    cache.put(request, response.clone());
+    if(response.ok)
+        cache.put(request, response.clone());
     return response;
 }

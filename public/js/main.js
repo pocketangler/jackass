@@ -2,6 +2,8 @@ import { initializeApp } from
     "https://www.gstatic.com/firebasejs/9.19.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, connectAuthEmulator } from
     "https://www.gstatic.com/firebasejs/9.19.0/firebase-auth.js";
+import { getFirestore, getDoc, doc, connectFirestoreEmulator } from
+    "https://www.gstatic.com/firebasejs/9.19.0/firebase-firestore.js";
 
 (async function () {
 
@@ -16,8 +18,10 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, conne
     });
 
     const auth = getAuth();
+    const db = getFirestore();
     if (localStorage.getItem("dev-mode")) {
         connectAuthEmulator(auth, "http://localhost:9099");
+        connectFirestoreEmulator(db, "localhost", "8080");
     }
 
     let currentUser, currentUserToken;
@@ -37,12 +41,13 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, conne
         currentUser = user;
         currentUserToken = currentUser && await currentUser.getIdToken(true);
 
-        document.querySelector(".username").textContent =
+        document.querySelector(".username")?.textContent =
             currentUser ? currentUser.displayName || currentUser.email : "";
 
         if (currentUser) {
 
-            await sampleRiverLevelsQuery({ token: currentUserToken });
+            sampleRiverLevelsQuery({ token: currentUserToken });
+            sampleFirestoreInteractions({ db, user: currentUser });
 
         }
 
@@ -137,3 +142,10 @@ async function sampleRiverLevelsQuery({ token }) {
     }
 }
 
+async function sampleFirestoreInteractions({ db, user }) {
+
+    const docRef = doc(db, "dashboards", user.uid);
+    const docSnap = await getDoc(docRef);
+    console.log(docSnap.data());
+
+}
