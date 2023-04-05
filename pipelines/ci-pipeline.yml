@@ -55,7 +55,7 @@ jobs:
       CI: true
 
   - task: Bash@3
-    display: 'Playwright browsers'
+    displayName: 'Playwright browsers'
     inputs:
       workingDirectory: 'test/e2e'
       targettype: 'inline'
