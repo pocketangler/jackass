@@ -11,7 +11,7 @@ jobs:
 - job: e2e
   pool:
     vmImage: 'ubuntu-latest'
-  #container: goofballlogic/mcr.microsoft.com_playwright:latest
+  container: mcr.microsoft.com/playwright/java:latest
 
   steps:
 
@@ -22,11 +22,11 @@ jobs:
     inputs:
       versionSpec: '16.x'
 
-  - task: Bash@3
-    displayName: 'Java JRE (Firestore emulator dependency)'
-    inputs:
-      targettype: 'inline'
-      script: whoami && sudo apt-get install -y default-jre #sudo apt-get update &&
+  # - task: Bash@3
+  #   displayName: 'Java JRE (Firestore emulator dependency)'
+  #   inputs:
+  #     targettype: 'inline'
+  #     script: whoami && sudo apt-get install -y default-jre #sudo apt-get update &&
 
   - task: Bash@3
     displayName: 'Firebase tools'
@@ -50,9 +50,7 @@ jobs:
     inputs:
       workingDirectory: 'test/e2e'
       targetType: 'inline'
-      script: |
-        npm ci
-        npx playwright install --with-deps
+      script: npm ci
     env:
       CI: true
 
