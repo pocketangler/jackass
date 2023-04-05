@@ -31,10 +31,10 @@ jobs:
       CI: true
 
   - task: Bash@3
-    displayName: 'Firebase java JRE (firestore emulator dependency)'
+    displayName: 'Java JRE (Firestore emulator dependency)'
     inputs:
       targettype: 'inline'
-      script: apt install -y default-jre
+      script: sudo apt install -y default-jre
 
   - task: Bash@3
     displayName: 'Firebase functions dependencies'
