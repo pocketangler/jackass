@@ -34,7 +34,7 @@ jobs:
     displayName: 'Java JRE (Firestore emulator dependency)'
     inputs:
       targettype: 'inline'
-      script: apt-get update && apt-get install -y default-jre
+      script: whoami && apt-get update && apt-get install -y default-jre
 
   - task: Bash@3
     displayName: 'Firebase functions dependencies'
