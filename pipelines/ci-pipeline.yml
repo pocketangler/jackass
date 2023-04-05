@@ -30,7 +30,7 @@ jobs:
     env:
       CI: true
 
-  - task: Bash @3
+  - task: Bash@3
     displayName: 'Firebase java JRE (firestore emulator dependency)'
     inputs:
       targettype: 'inline'
