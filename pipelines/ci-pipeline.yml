@@ -11,7 +11,7 @@ jobs:
 - job: e2e
   pool:
     vmImage: 'ubuntu-latest'
-  #container: mcr.microsoft.com/playwright:latest
+  container: goofballlogic/mcr.microsoft.com_playwright:latest
 
   steps:
 
@@ -22,19 +22,19 @@ jobs:
     inputs:
       versionSpec: '16.x'
 
-  - task: Bash@3
-    displayName: 'Java JRE (Firestore emulator dependency)'
-    inputs:
-      targettype: 'inline'
-      script: whoami && sudo apt-get update && sudo apt-get install -y default-jre
+  # - task: Bash@3
+  #   displayName: 'Java JRE (Firestore emulator dependency)'
+  #   inputs:
+  #     targettype: 'inline'
+  #     script: whoami && sudo apt-get install -y default-jre #sudo apt-get update &&
 
-  - task: Bash@3
-    displayName: 'Firebase tools'
-    inputs:
-      targettype: 'inline'
-      script: npm install -g firebase-tools
-    env:
-      CI: true
+  # - task: Bash@3
+  #   displayName: 'Firebase tools'
+  #   inputs:
+  #     targettype: 'inline'
+  #     script: npm install -g firebase-tools
+  #   env:
+  #     CI: true
 
   - task: Bash@3
     displayName: 'Firebase functions dependencies'
@@ -54,14 +54,14 @@ jobs:
     env:
       CI: true
 
-  - task: Bash@3
-    displayName: 'Playwright browsers'
-    inputs:
-      workingDirectory: 'test/e2e'
-      targettype: 'inline'
-      script: npx playwright install
-    env:
-      CI: true
+  # - task: Bash@3
+  #   displayName: 'Playwright browsers'
+  #   inputs:
+  #     workingDirectory: 'test/e2e'
+  #     targettype: 'inline'
+  #     script: npx playwright install
+  #   env:
+  #     CI: true
 
   - task: Bash@3
     displayName: 'Run Playwright tests'
