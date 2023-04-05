@@ -13,12 +13,17 @@ export default async ({ page, context }, use) => {
                 await page.evaluate(() => localStorage.setItem("dev-mode", true));
                 await page.goto("/");
             }
-            await page.getByText("Sign in").click();
-            await page.locator("form").getByText("Email").fill(username);
-            await page.locator("form").getByText("Password").fill(password);
+            await Promise.all([
+                page.waitForURL("/login.html"),
+                page.getByText("Sign in").click()
+            ]);
+            while(!await page.locator("form").getByText("Email").inputValue())
+                await page.locator("form").getByText("Email").fill(username);
+            while(!await page.locator("form").getByText("Password").inputValue())
+                await page.locator("form").getByText("Password").fill(password);
             await Promise.all([
                 page.waitForURL("/"),
-                page.locator("form").getByText("Sign In").click()
+                page.locator("form").getByRole("button", { hasText: "Sign In" }).click().then(() => console.log("signed in"))
             ]);
 
         },

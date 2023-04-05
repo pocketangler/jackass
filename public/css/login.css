@@ -97,3 +97,7 @@ section.login input:focus {
     border-color: var(--light-blue);
     outline-color: var(--light-blue);
 }
+
+section.login button:disabled {
+    display: none;
+}

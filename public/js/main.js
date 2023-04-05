@@ -62,18 +62,19 @@ import { getFirestore, getDoc, doc, connectFirestoreEmulator } from
     const loginForm = document.querySelector("section.login form");
     if (loginForm) {
 
-        loginForm.addEventListener("submit", async e => {
+        loginForm.addEventListener("submit", e => {
 
             e.preventDefault();
             const data = new FormData(loginForm);
-            try {
-                console.log(data.get("email"), data.get("password"));
-                const result = await signInWithEmailAndPassword(auth, data.get("email"), data.get("password"));
-                const { user } = result;
-                if (user) location.href = "/";
-            } catch (err) {
-                console.error(err.stack);
-            }
+            (async function() {
+                try {
+                    const result = await signInWithEmailAndPassword(auth, data.get("email"), data.get("password"));
+                    const { user } = result;
+                    if (user) location.href = "/";
+                } catch (err) {
+                    console.error(err.stack);
+                }
+            }());
 
         });
 
