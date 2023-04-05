@@ -3,9 +3,8 @@ const { describe, beforeEach } = test;
 
 describe("When I log in", () => {
 
-    beforeEach(async ({ page, login }) => {
+    beforeEach(async ({ login }) => {
 
-        page.on("console", console.log.bind(console));
         await login.withUsernameAndPassword("roofus@gmail.com", "Password1!");
 
     });
