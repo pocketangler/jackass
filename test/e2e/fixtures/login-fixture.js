@@ -14,7 +14,7 @@ export default async ({ page, context }, use) => {
                 await page.evaluate(() => localStorage.setItem("dev-mode", true));
                 console.log("2345");
                 console.log(await page.url());
-                await page.goto("/");
+                await page.reload();
             }
             await Promise.all([
                 page.waitForURL("/login.html"),
