@@ -35,6 +35,7 @@ const { describe, beforeEach } = test;
 
 test("Webkit bug", async ({ context, page }) => {
 
+    await page.on("console", console.log.bind(console));
     await page.goto("/");
     const storageState = await context.storageState();
     console.log(storageState);

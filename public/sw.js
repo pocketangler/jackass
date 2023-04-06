@@ -14,6 +14,7 @@ self.addEventListener("activate", async (event) => {
 
 self.addEventListener("fetch", (event) => {
     if (event.request.method !== "GET") return;
+    console.log(event.request.url);
     event.respondWith(readThrough(event));
 });
 
