@@ -22,11 +22,11 @@ jobs:
     inputs:
       versionSpec: '16.x'
 
-  - task: Bash@3
-    displayName: 'Java JRE (Firestore emulator dependency)'
-    inputs:
-      targettype: 'inline'
-      script: whoami && sudo apt-get install -y default-jre #sudo apt-get update &&
+  # - task: Bash@3
+  #   displayName: 'Java JRE (Firestore emulator dependency)'
+  #   inputs:
+  #     targettype: 'inline'
+  #     script:  sudo apt-get install -y default-jre #sudo apt-get update &&
 
   - task: Bash@3
     displayName: 'Firebase tools'
