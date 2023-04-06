@@ -10,8 +10,8 @@ pool:
 jobs:
 - job: e2e
   pool:
-    vmImage: 'macos-latest'
-  #container: mcr.microsoft.com/playwright/java:latest
+    vmImage: 'ubuntu-latest'
+  container: mcr.microsoft.com/playwright:latest
 
   steps:
 
@@ -60,14 +60,14 @@ jobs:
     env:
       CI: true
 
-  - task: Bash@3
-    displayName: 'Playwright browsers'
-    inputs:
-      workingDirectory: 'test/e2e'
-      targettype: 'inline'
-      script: npx playwright install --with-deps
-    env:
-      CI: true
+  # - task: Bash@3
+  #   displayName: 'Playwright browsers'
+  #   inputs:
+  #     workingDirectory: 'test/e2e'
+  #     targettype: 'inline'
+  #     script: npx playwright install --with-deps
+  #   env:
+  #     CI: true
 
   - task: Bash@3
     displayName: 'Run Playwright tests'
