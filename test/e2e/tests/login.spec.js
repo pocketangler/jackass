@@ -43,4 +43,4 @@ test("Webkit bug", async ({ context, page }) => {
     console.log(storageState2);
     await page.reload();
 
-});
+})
