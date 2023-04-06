@@ -22,6 +22,12 @@ jobs:
     inputs:
       versionSpec: '16.x'
 
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: '11'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
+
   # - task: Bash@3
   #   displayName: 'Java JRE (Firestore emulator dependency)'
   #   inputs:
