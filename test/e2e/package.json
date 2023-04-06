@@ -12,6 +12,6 @@
   "dependencies": {
     "firebase-tools": "^11.25.2",
     "playwright": "^1.32.1",
-    "@playwright/test": "^1.32.1"
+    "@playwright/test": "^1.33.0-alpha-1680774768000"
   }
 }
