@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "webkit-bug" ]
 
   workflow_dispatch:
 
@@ -28,5 +28,7 @@ jobs:
       working-directory: test/e2e
 
     - run: |
+        npm install -g http-server
+        http-server ../../public --port 5000 > http.log 2>&1 &
         DEBUG=pw:browser* npx playwright test
       working-directory: test/e2e
