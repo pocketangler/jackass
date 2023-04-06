@@ -59,7 +59,7 @@ jobs:
     inputs:
       workingDirectory: 'test/e2e'
       targettype: 'inline'
-      script: npx playwright install
+      script: npx playwright install --with-deps
     env:
       CI: true
 
