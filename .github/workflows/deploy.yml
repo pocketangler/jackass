@@ -34,6 +34,6 @@ jobs:
       working-directory: test/e2e
 
     - run: |
-        firebase use pocketangler-v1-5 --token "$(token)"
-        firebase emulators:exec --import ../emulator-state "npx playwright test" --token "$(token)"
+        firebase use pocketangler-v1-5 --token "${{ secrets.FIREBASE_TOKEN }}"
+        firebase emulators:exec --import ../emulator-state "npx playwright test" --token "${{ secrets.FIREBASE_TOKEN }}"
       working-directory: test/e2e
