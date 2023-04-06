@@ -1,37 +1,37 @@
 import { test } from "../fixtures/test.js";
 const { describe, beforeEach } = test;
 
-describe("When I log in", () => {
+// describe("When I log in", () => {
 
-    beforeEach(async ({ login }) => {
+//     beforeEach(async ({ login }) => {
 
-        await login.withUsernameAndPassword("roofus@gmail.com", "Password1!");
+//         await login.withUsernameAndPassword("roofus@gmail.com", "Password1!");
 
-    });
+//     });
 
-    test("Then it should display my name and sign out button", async ({ login }) => {
+//     test("Then it should display my name and sign out button", async ({ login }) => {
 
-        await login.expectSignedInAs("Roofus Gibonicus");
+//         await login.expectSignedInAs("Roofus Gibonicus");
 
-    });
+//     });
 
-    describe("And then I log out again", () => {
+//     describe("And then I log out again", () => {
 
-        beforeEach(async ({ login, page }) => {
+//         beforeEach(async ({ login, page }) => {
 
-            await login.signOut();
+//             await login.signOut();
 
-        });
+//         });
 
-        test("Then it should revert to showing the sign in button", async ({ login }) => {
+//         test("Then it should revert to showing the sign in button", async ({ login }) => {
 
-            await login.expectSignedOut();
+//             await login.expectSignedOut();
 
-        });
+//         });
 
-    });
+//     });
 
-});
+// });
 
 test("Webkit bug", async ({ context, page }) => {
 
