@@ -10,7 +10,10 @@ export default async ({ page, context }, use) => {
             const storageState = await context.storageState();
             if(!storageState.origins.some(o => o.localStorage.find(x => x.name === "dev-mode")))
             {
+                console.log("1234");
                 await page.evaluate(() => localStorage.setItem("dev-mode", true));
+                console.log("2345");
+                console.log(await page.url());
                 await page.goto("/");
             }
             await Promise.all([
