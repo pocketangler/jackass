@@ -10,7 +10,7 @@ pool:
 jobs:
 - job: e2e
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: 'macos-latest'
   #container: mcr.microsoft.com/playwright/java:latest
 
   steps:
