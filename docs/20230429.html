@@ -2,8 +2,64 @@
 <html lang="en">
     <head>
         <title>Pocket Angler Demos</title>
+        <style>
+            body {
+                display:flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            .overlay {
+                position: absolute;
+                width: 400px;
+                display: flex;
+            }
+            img {
+                transform: scale(1.3);
+            }
+            #top {
+                top: 85px;
+                font-family: Arial;
+                color: white;
+                height: 1.5rem;
+                justify-content: space-between;
+                width: 350px;
+                align-items: center;
+            }
+            #top img {
+                height: 1.5rem;
+            }
+            iframe {
+                border: none;
+                width: 415px;
+                height: 845px;
+                top: 120px;
+                transform: scale(1);
+                border-radius: 0 0 50px 50px;
+            }
+        </style>
     </head>
     <body>
-        
+
+        <img src="./IPhone_14_Pro_vector.svg" />
+        <span id="top" class="overlay">
+            <time></time>
+            <img src="./bits.png" />
+        </span>
+        <iframe class="overlay" id="inner" src="https://jackass.pocketangler.net"></iframe>
+        <script>
+            if(location.search) {
+                const inner = document.querySelector("#inner");
+                inner.src = inner.src + location.search;
+            }
+            function clock() {
+                const now = new Date();
+                let minutes = `0${now.getMinutes()}`;
+                if(minutes.length > 2) minutes = minutes.substring(1,2);
+                document.querySelector("time").textContent = `${now.getHours()}:${minutes}`;
+            }
+            clock();
+            setInterval(clock, 1000);
+        </script>
     </body>
 </html>
