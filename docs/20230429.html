@@ -59,7 +59,7 @@
             function clock() {
                 const now = new Date();
                 let minutes = `0${now.getMinutes()}`;
-                if(minutes.length > 2) minutes = minutes.substring(1,2);
+                if(minutes.length > 2) minutes = minutes.substring(1,3);
                 document.querySelector("time").textContent = `${now.getHours()}:${minutes}`;
             }
             clock();
